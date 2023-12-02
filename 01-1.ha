@@ -7,6 +7,7 @@ use strconv;
 use strings;
 use types;
 
+
 export fn get_digit(iter: strings::iterator) int = {
 	for (true) {
 		const next = strings::next(&iter);
@@ -22,6 +23,7 @@ export fn get_digit(iter: strings::iterator) int = {
 	};
 };
 
+
 export fn get_line_value(line: str) int = {
 	let iter = strings::iter(line);
 	let first_digit = get_digit(iter);
@@ -29,6 +31,7 @@ export fn get_line_value(line: str) int = {
 	let second_digit = get_digit(riter);
 	return first_digit * 10 + second_digit;
 };
+
 
 export fn main() void = {
 	const f = os::open("./data/01")!;

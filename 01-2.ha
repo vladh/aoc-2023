@@ -7,6 +7,7 @@ use strconv;
 use strings;
 use types;
 
+
 export fn get_digit(iter: strings::iterator, line: str, reverse: bool) int = {
 	let next_idx = 0z;
 	for (true) {
@@ -38,6 +39,7 @@ export fn get_digit(iter: strings::iterator, line: str, reverse: bool) int = {
 	};
 };
 
+
 export fn get_line_value(line: str) int = {
 	let iter = strings::iter(line);
 	let first_digit = get_digit(iter, line, false);
@@ -45,6 +47,7 @@ export fn get_line_value(line: str) int = {
 	let second_digit = get_digit(riter, line, true);
 	return first_digit * 10 + second_digit;
 };
+
 
 export fn main() void = {
 	const f = os::open("./data/01")!;
