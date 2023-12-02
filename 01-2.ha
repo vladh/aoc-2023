@@ -1,9 +1,11 @@
 use ascii;
+use bufio;
 use fmt;
 use io;
 use os;
 use strconv;
 use strings;
+use types;
 
 export fn get_digit(iter: strings::iterator, line: str, reverse: bool) int = {
 	let next_idx = 0z;
@@ -45,13 +47,15 @@ export fn get_line_value(line: str) int = {
 };
 
 export fn main() void = {
-	const data = os::open("./data/01")!;
-	const data = io::drain(data)!;
-	const data = strings::fromutf8(data)!;
-	const lines = strings::split(data, "\n");
+	const f = os::open("./data/01")!;
+	const scanner = bufio::newscanner(f, types::SIZE_MAX);
+	defer bufio::finish(&scanner);
 	let sum = 0;
-	for (let idx = 0z; idx < len(lines); idx += 1) {
-		const line = lines[idx];
+	for (true) {
+		const line = match (bufio::scan_line(&scanner)!) {
+		case let s: const str => yield s;
+		case io::EOF          => break;
+		};
 		if (len(line) == 0) { continue; };
 		sum += get_line_value(line);
 	};
