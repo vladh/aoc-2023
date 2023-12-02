@@ -25,15 +25,15 @@ export fn get_digit(iter: strings::iterator, line: str, reverse: bool) int = {
 			} else {
 				yield strings::sub(line, next_idx - 1, strings::end);
 			};
-			if (strings::hasprefix(sub, "one")) { return 1; };
-			if (strings::hasprefix(sub, "two")) { return 2; };
+			if (strings::hasprefix(sub, "one"))   { return 1; };
+			if (strings::hasprefix(sub, "two"))   { return 2; };
 			if (strings::hasprefix(sub, "three")) { return 3; };
-			if (strings::hasprefix(sub, "four")) { return 4; };
-			if (strings::hasprefix(sub, "five")) { return 5; };
-			if (strings::hasprefix(sub, "six")) { return 6; };
+			if (strings::hasprefix(sub, "four"))  { return 4; };
+			if (strings::hasprefix(sub, "five"))  { return 5; };
+			if (strings::hasprefix(sub, "six"))   { return 6; };
 			if (strings::hasprefix(sub, "seven")) { return 7; };
 			if (strings::hasprefix(sub, "eight")) { return 8; };
-			if (strings::hasprefix(sub, "nine")) { return 9; };
+			if (strings::hasprefix(sub, "nine"))  { return 9; };
 		};
 	};
 };
