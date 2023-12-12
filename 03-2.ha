@@ -37,21 +37,23 @@ fn lineparts_print(line: lineparts) void = {
 
 fn lineparts_get_sum(prev_line: lineparts, curr_line: lineparts, next_line: lineparts) int = {
 	let sum = 0;
-	for (let idx_num = 0z; idx_num < len(curr_line.numbers); idx_num += 1) {
-		const number = curr_line.numbers[idx_num];
-		let should_add = false;
+	for (let idx_symb = 0z; idx_symb < len(curr_line.symbol_idxs); idx_symb += 1) {
+		const symbol_idx = curr_line.symbol_idxs[idx_symb];
+		let n_adj_numbers = 0;
+		let product = 1;
 		let lines = [prev_line, curr_line, next_line];
 		for (let idx_line = 0z; idx_line < len(lines); idx_line += 1) {
 			const line = lines[idx_line];
-			for (let idx_symb = 0z; idx_symb < len(line.symbol_idxs); idx_symb += 1) {
-				const symbol_idx = line.symbol_idxs[idx_symb];
+			for (let idx_num = 0z; idx_num < len(line.numbers); idx_num += 1) {
+				const number = line.numbers[idx_num];
 				if (symbol_idx >= number.idx_start - 1 && symbol_idx <= number.idx_end + 1) {
-					should_add = true;
+					product *= number.val;
+					n_adj_numbers += 1;
 				};
 			};
 		};
-		if (should_add) {
-			sum += number.val;
+		if (n_adj_numbers == 2) {
+			sum += product;
 		};
 	};
 	return sum;
@@ -77,7 +79,7 @@ fn lineparts_parse(line_str: str) lineparts = {
 				curr_num.val *= 10;
 				curr_num.val += digit;
 				continue;
-			} else if (r != '.') {
+			} else if (r == '*') {
 				append(line.symbol_idxs, idx: int);
 			};
 		};
