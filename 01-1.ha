@@ -8,10 +8,9 @@ use strings;
 use types;
 
 
-export fn get_digit(iter: strings::iterator) int = {
+fn get_digit(iter: strings::iterator) int = {
 	for (true) {
-		const next = strings::next(&iter);
-		match (next) {
+		match (strings::next(&iter)) {
 		case void =>
 			return 0;
 		case let r: rune =>
@@ -24,7 +23,7 @@ export fn get_digit(iter: strings::iterator) int = {
 };
 
 
-export fn get_line_value(line: str) int = {
+fn get_line_value(line: str) int = {
 	let iter = strings::iter(line);
 	let first_digit = get_digit(iter);
 	let riter = strings::riter(line);

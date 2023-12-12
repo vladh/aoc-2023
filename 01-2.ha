@@ -8,12 +8,9 @@ use strings;
 use types;
 
 
-export fn get_digit(iter: strings::iterator, line: str, reverse: bool) int = {
-	let next_idx = 0z;
-	for (true) {
-		const next = strings::next(&iter);
-		next_idx += 1;
-		match (next) {
+fn get_digit(iter: strings::iterator, line: str, reverse: bool) int = {
+	for (let idx = 0z; true; idx += 1) {
+		match (strings::next(&iter)) {
 		case void =>
 			return 0;
 		case let r: rune =>
@@ -22,9 +19,9 @@ export fn get_digit(iter: strings::iterator, line: str, reverse: bool) int = {
 				return strconv::stoi(s)!;
 			};
 			const sub = if (reverse) {
-				yield strings::sub(line, len(line) - next_idx - 1, strings::end);
+				yield strings::sub(line, len(line) - idx, strings::end);
 			} else {
-				yield strings::sub(line, next_idx - 1, strings::end);
+				yield strings::sub(line, idx, strings::end);
 			};
 			if (strings::hasprefix(sub, "one"))   { return 1; };
 			if (strings::hasprefix(sub, "two"))   { return 2; };
@@ -40,7 +37,7 @@ export fn get_digit(iter: strings::iterator, line: str, reverse: bool) int = {
 };
 
 
-export fn get_line_value(line: str) int = {
+fn get_line_value(line: str) int = {
 	let iter = strings::iter(line);
 	let first_digit = get_digit(iter, line, false);
 	let riter = strings::riter(line);

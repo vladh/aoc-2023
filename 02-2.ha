@@ -8,7 +8,7 @@ use strings;
 use types;
 
 
-export fn get_game_value(line: str) size = {
+fn get_game_value(line: str) size = {
 	let is_possible = true;
 	let max_red = 0z;
 	let max_green = 0z;

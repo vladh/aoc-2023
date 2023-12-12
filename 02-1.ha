@@ -12,7 +12,7 @@ def MAX_GREEN: size = 13z;
 def MAX_BLUE: size = 14z;
 
 
-export fn get_game_value(line: str) size = {
+fn get_game_value(line: str) size = {
 	let is_possible = true;
 
 	const tok_header = strings::tokenize(line, ": ");
